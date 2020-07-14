@@ -87,7 +87,25 @@ const data = [  ['img/thumb_3.webp', 'img/thumb_4.webp', 'img/thumb_5.webp'], ['
           setTimeout(()=>{
                        card.classList.remove('videos__item-active');
                     }, 20)
-      
+                   if(nigth === true){
+                    card.querySelector('.videos__item-descr').style.color='#fff';
+                    card.querySelector('.videos__item-views').style.color='#fff';
+                   }
                 }
-
+                sliceTitle('.videos__item-descr', 55)
   })
+
+
+  //create slice function 
+  const sliceTitle  = (selector, count)=>{
+      document.querySelectorAll(selector).forEach((item)=>{
+          item.textContent.trim()
+          if(item.textContent.length < count){
+                           return ;
+          }else{
+              const str = item.textContent.slice(0, count+1)+'...';
+              item.textContent=str;
+          }
+      })
+
+  }
