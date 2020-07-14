@@ -2,7 +2,7 @@
 const swicher = document.querySelector('#cbx'),
 more = document.querySelector('.more'),
 modal = document.querySelector('.modal'),
-videos = document.querySelector('.videos__item'),
+videos = document.querySelectorAll('.videos__item'),
 videosWraper = document.querySelector('.videos__wrapper');
 
 // make nav click toggle
@@ -65,6 +65,8 @@ swicher.addEventListener('change', ()=>{
     swichMode();
 })
 
+
+
 // make load with litle data 
 const data = [  ['img/thumb_3.webp', 'img/thumb_4.webp', 'img/thumb_5.webp'], ['#3 Верстка на flexbox CSS | Блок преимущества и галерея | Марафон верстки | Артем Исламов', '#2 Установка spikmi и работа с ветками на Github | Марафон вёрстки Урок 2',  '#1 Верстка реального заказа landing Page | Марафон вёрстки | Артём Исламов'], ['3,6​тыс. просмотров', '4,2 тыс. просмотров', '28 тыс. просмотров'],  ['X9SmcY3lM-U', '7BvHoh0BrMw', 'mC8JW_aG2EM'] 
   ];
@@ -109,3 +111,28 @@ const data = [  ['img/thumb_3.webp', 'img/thumb_4.webp', 'img/thumb_5.webp'], ['
       })
 
   }
+//open  function open modal
+
+const openModal = () =>{
+    modal.style.display = 'block';
+}
+
+// close fuunction close modal
+const closeModal = ()=>{
+    modal.style.display= 'none';
+}
+//bind function modal 
+const bindModal= (car) =>{
+    car.forEach(item =>{
+      item.addEventListener('click', (event)=>{
+       // const id=item.getAttribute('data-url');
+        //loadVideo(id);
+        event.preventDefault();
+        openModal();
+      })
+    })
+  
+  }
+bindModal(videos);
+
+
