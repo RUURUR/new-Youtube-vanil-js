@@ -4,7 +4,7 @@ more = document.querySelector('.more'),
 modal = document.querySelector('.modal'),
 videos = document.querySelectorAll('.videos__item'),
 videosWraper = document.querySelector('.videos__wrapper');
-
+let player;
 // make nav click toggle
 const bindSlideTogle = (trigger, boxBody, content, openClass)=>{
 let button ={
@@ -124,14 +124,19 @@ const openModal = () =>{
 // close fuunction close modal
 const closeModal = ()=>{
     modal.style.display= 'none';
+    //when close modal callback 
+    player.stopVideo();
 }
 //bind function modal 
 const bindModal= (car) =>{
     car.forEach(item =>{
       item.addEventListener('click', (event)=>{
-       // const id=item.getAttribute('data-url');
-        //loadVideo(id);
-        event.preventDefault();
+    event.preventDefault();
+    // take wideo id by video 
+       const id=item.getAttribute('data-url');
+       // callback function 
+       loadVideo(id);
+    
         openModal();
       })
     })
@@ -141,9 +146,12 @@ bindModal(videos);
   //one bind card open modal
   const bindNewModal=(cards) =>{
     cards.addEventListener('click', (event)=>{
-        // const id=item.getAttribute('data-url');
-         //loadVideo(id);
-         event.preventDefault();
+        event.preventDefault();
+        // take wideo id by video 
+          const id=cards.getAttribute('data-url');
+          loadVideo(id);
+      
+       
          openModal();
        }) 
 }
@@ -159,24 +167,25 @@ modal.addEventListener('click', event=>{
 
 
 //work with api iframe for show video
-    // 2. This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
+   const createVideo = () =>{
+           // 2. This code loads the IFrame Player API code asynchronously.
+      let tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      tag.src = "https://www.youtube.com/iframe_api";
+      let firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '360',
-        width: '640',
-        videoId: 'M7lc1UVf-VE',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      });
-    }
+      setTimeout(()=>{
+        player  = new YT.Player('frame', {
+            height: '100%',
+            width: '100%',
+            videoId: 'M7lc1UVf-VE',
+           
+          });
+      },1300)
+      
+   }
+   createVideo();
+   function loadVideo (id){
+    player.loadVideoById({'videoId': `${id}`})
+     }
