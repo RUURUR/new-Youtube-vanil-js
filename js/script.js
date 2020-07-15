@@ -70,6 +70,9 @@ swicher.addEventListener('change', ()=>{
 // make load with litle data 
 const data = [  ['img/thumb_3.webp', 'img/thumb_4.webp', 'img/thumb_5.webp'], ['#3 Верстка на flexbox CSS | Блок преимущества и галерея | Марафон верстки | Артем Исламов', '#2 Установка spikmi и работа с ветками на Github | Марафон вёрстки Урок 2',  '#1 Верстка реального заказа landing Page | Марафон вёрстки | Артём Исламов'], ['3,6​тыс. просмотров', '4,2 тыс. просмотров', '28 тыс. просмотров'],  ['X9SmcY3lM-U', '7BvHoh0BrMw', 'mC8JW_aG2EM'] 
   ];
+
+
+
   //load afteer click
   more.addEventListener('click', ()=>{
       more.remove();
@@ -88,7 +91,8 @@ const data = [  ['img/thumb_3.webp', 'img/thumb_4.webp', 'img/thumb_5.webp'], ['
           videosWraper.append(card);
           setTimeout(()=>{
                        card.classList.remove('videos__item-active');
-                    }, 20)
+                    }, 20);
+                    bindNewModal(card)
                    if(nigth === true){
                     card.querySelector('.videos__item-descr').style.color='#fff';
                     card.querySelector('.videos__item-views').style.color='#fff';
@@ -134,5 +138,14 @@ const bindModal= (car) =>{
   
   }
 bindModal(videos);
+  //one bind card open modal
+  const bindNewModal=(cards) =>{
+    cards.addEventListener('click', (event)=>{
+        // const id=item.getAttribute('data-url');
+         //loadVideo(id);
+         event.preventDefault();
+         openModal();
+       }) 
+}
 
 
